@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curso - Meio Ambiente, Sustentabilidade e Organização do Trabalho</title>
+<style>
+:root {
+  --bg:#f4f7fb; --card:#ffffff; --ink:#162033; --muted:#667085; --line:#d9e3ef;
+  --blue:#0757a6; --blue2:#083a70; --green:#198754; --orange:#e88622;
+  --soft:#eef5ff; --danger:#b42318; --ok:#157347;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+button,input{font:inherit} .hidden{display:none!important}
+.app{min-height:100vh;display:grid;grid-template-columns:305px 1fr}
+.sidebar{height:100vh;position:sticky;top:0;overflow:auto;background:linear-gradient(180deg,#063d72,#0757a6);color:#fff;padding:18px 15px}
+.course-name{font-size:19px;font-weight:900;line-height:1.2;margin:8px 5px 3px}
+.course-sub{font-size:12px;opacity:.88;line-height:1.45;margin:0 5px 15px}
+.side-progress{background:rgba(255,255,255,.12);border-radius:12px;padding:11px;margin-bottom:14px}
+.side-progress small{display:block;margin-bottom:6px} .track{height:8px;background:rgba(255,255,255,.28);border-radius:999px;overflow:hidden} .track div{height:100%;background:#61d66d;width:0}
+.navbtn{width:100%;border:0;border-radius:10px;padding:10px 11px;margin:4px 0;text-align:left;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;font-weight:700}
+.navbtn:hover{background:rgba(255,255,255,.16)} .navbtn.active{background:#fff;color:#073b70} .navbtn.done{outline:2px solid rgba(112,231,136,.55)}
+.module-title{font-size:12px;font-weight:900;letter-spacing:.03em;margin:14px 6px 5px;color:#bfe0ff}
+.main{min-width:0;padding:22px clamp(15px,3vw,40px) 40px}
+.header{max-width:1120px;margin:0 auto 16px;background:linear-gradient(115deg,#073d76,#0f72c9);border-radius:18px;padding:20px 24px;color:white;box-shadow:0 10px 28px rgba(4,55,104,.18);position:relative;overflow:hidden}
+.header:after{content:"";position:absolute;right:-60px;top:-90px;width:270px;height:270px;border-radius:50%;background:rgba(89,216,101,.18)}
+.header h1{margin:0 0 6px;font-size:clamp(25px,4vw,40px)} .header p{margin:0;opacity:.95}
+.panel{max-width:1120px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:18px;padding:clamp(20px,3vw,34px);box-shadow:0 10px 28px rgba(20,40,70,.06)}
+.badge{display:inline-flex;background:#e8f2ff;color:#0d4d91;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:900}
+.lesson-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px} .lesson-head h2{margin:0;font-size:clamp(24px,3vw,34px)}
+.objective{background:#edf6ff;border-left:5px solid #1670be;padding:13px 15px;border-radius:10px;margin:16px 0;font-size:16px}
+.content h3{color:#0b4e8c;margin-top:20px} .content p,.content li{line-height:1.65} .content ul,.content ol{padding-left:24px}
+.tip{background:#effbeF;border:1px solid #bde6c1;border-radius:11px;padding:13px 15px;margin:15px 0}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px} .box{padding:15px;border-radius:13px;border:1px solid var(--line)} .renewable{background:#ebfaef} .nonrenew{background:#fff1e8}
+.three-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;margin:12px 0} .mini{border:1px solid var(--line);border-radius:12px;padding:14px;background:#f8fafc;line-height:1.5} .mini.green{background:#eaf8ef} .mini.blue{background:#eaf3ff} .mini.orange{background:#fff3e4}
+.priority li{margin:7px 0}
+.lesson-svg{display:block;width:100%;max-height:390px;margin:18px 0;border-radius:14px}
+.actions{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.btn{border:0;border-radius:10px;padding:11px 16px;font-weight:850;cursor:pointer} .primary{background:var(--blue);color:#fff} .secondary{background:#e9eef6;color:#24344b} .danger{background:#fff0ee;color:var(--danger);border:1px solid #ffc8c1}
+.home-card{max-width:900px;margin:auto;background:#fff;border:1px solid var(--line);border-radius:20px;padding:30px;box-shadow:0 12px 34px rgba(20,40,70,.07)} .home-card h2{font-size:34px;margin:12px 0}
+.name-input{width:100%;padding:13px;border:1px solid #b9c5d7;border-radius:10px;margin-top:7px}
+.overview{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0} .overview-card{border:1px solid var(--line);border-radius:13px;padding:15px;background:#fbfcfe} .overview-card strong{display:block;font-size:22px;color:#0b4e8c}
+.quiz-meta{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px} .tag{background:#f0f3f8;padding:5px 8px;border-radius:999px;font-size:12px;font-weight:800;color:#475467}
+.qtext{font-size:21px;line-height:1.5;white-space:pre-line}
+.option{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:12px;padding:13px;margin:9px 0;cursor:pointer} .option.selected{border-color:var(--blue);background:#eef5ff} .letter{min-width:28px;height:28px;display:grid;place-items:center;border-radius:7px;background:#edf1f7;font-weight:900}
+.score{font-size:58px;font-weight:900;color:#0b4e8c;margin:8px 0} .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:17px 0} .stat{border:1px solid var(--line);border-radius:12px;padding:13px;background:#fbfcfe} .stat strong{display:block;font-size:24px}
+.result-level{border-radius:12px;padding:14px;background:#edf7ff;border:1px solid #bdd8ef;margin:13px 0} .result-level strong{font-size:22px}
+@media(max-width:900px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto}.overview,.three-cards{grid-template-columns:1fr}}
+@media(max-width:650px){.two-col,.stats{grid-template-columns:1fr}.header{border-radius:0}.main{padding:12px 0 30px}.panel,.home-card{border-radius:0;border-left:0;border-right:0}}
+
+.module-quiz-title{margin:0 0 6px;color:#0b4e8c}
+.module-quiz-intro{color:#667085;margin-bottom:18px;line-height:1.55}
+.module-q{border:1px solid var(--line);border-radius:14px;padding:16px;margin:14px 0;background:#fbfcfe}
+.module-q h3{margin:0 0 12px;color:#172033;font-size:18px}
+.module-option{display:flex;gap:10px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin:8px 0;background:#fff;cursor:pointer}
+.module-option.selected{border-color:var(--blue);background:#eef5ff}
+.module-feedback{margin-top:9px;padding:10px 12px;border-radius:9px;font-size:14px;line-height:1.45}
+.module-feedback.ok{background:#eaf8f0;color:#12663f;border:1px solid #9bd8b3}
+.module-feedback.err{background:#fff1ef;color:#8d2018;border:1px solid #ffc7c1}
+.block-score{font-size:44px;font-weight:900;color:#0b4e8c;margin:8px 0}
+.block-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+@media(max-width:650px){.block-summary{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="course-name">Eletromecânico de Motores de Combustão Interna</div>
+    <div class="course-sub">Meio Ambiente, Sustentabilidade e Organização do Trabalho • 8 horas</div>
+    <div class="side-progress">
+      <small id="progressText">Progresso do curso: 0%</small>
+      <div class="track"><div id="progressBar"></div></div>
+    </div>
+    <button class="navbtn" data-screen="home">🏠 Início do curso</button>
+    <div id="navModules"></div>
+    <div class="module-title">AVALIAÇÃO</div>
+    <button class="navbtn" data-screen="quiz">🏆 Simulado final — 15 questões</button>
+    <button class="navbtn" data-screen="result">📊 Meu desempenho</button>
+  </aside>
+
+  <main class="main">
+    <div class="header">
+      <h1>Meio Ambiente, Sustentabilidade e Organização do Trabalho</h1>
+      <p>Curso aplicado à manutenção e ao ambiente de trabalho de motores de combustão interna.</p>
+    </div>
+    <div id="content"></div>
+  </main>
+</div>
+
+<script>
+const MODULES = [{"id": 1, "title": "Desenvolvimento Sustentável", "hours": 4, "icon": "🌱", "lessons": [{"title": "Produção e consumo inteligente", "objective": "Entender como usar recursos e fontes de energia de forma racional na oficina e na manutenção de motores.", "content": "\n                <h3>O que significa?</h3>\n                <p><strong>Produção e consumo inteligente</strong> significa utilizar somente o necessário, evitando desperdícios de água, energia, combustível, materiais e peças.</p>\n                <div class=\"tip\"><strong>Na manutenção de motores:</strong> desligar equipamentos que não estão em uso, evitar vazamentos, usar a quantidade correta de produtos de limpeza e armazenar materiais corretamente.</div>\n                <h3>Uso racional de recursos</h3>\n                <p>Usar um recurso de forma racional é obter o melhor resultado possível com o menor desperdício.</p>\n                <ul>\n                  <li>Água: evitar mangueiras abertas sem necessidade.</li>\n                  <li>Energia: desligar iluminação e equipamentos ociosos.</li>\n                  <li>Combustível: evitar testes prolongados e desnecessários do motor.</li>\n                  <li>Materiais: aproveitar peças e insumos dentro das condições técnicas e de segurança.</li>\n                </ul>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\" role=\"img\" aria-label=\"Diagrama de uso racional de recursos\">\n                  <defs>\n                    <linearGradient id=\"g1\" x1=\"0\" x2=\"1\"><stop stop-color=\"#e6f7ea\"/><stop offset=\"1\" stop-color=\"#e7f0ff\"/></linearGradient>\n                  </defs>\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"url(#g1)\" stroke=\"#cbd8e8\"/>\n                  <circle cx=\"450\" cy=\"165\" r=\"75\" fill=\"#1769aa\"/>\n                  <text x=\"450\" y=\"145\" text-anchor=\"middle\" fill=\"white\" font-size=\"26\" font-weight=\"700\">USO</text>\n                  <text x=\"450\" y=\"178\" text-anchor=\"middle\" fill=\"white\" font-size=\"26\" font-weight=\"700\">RACIONAL</text>\n                  <text x=\"450\" y=\"205\" text-anchor=\"middle\" fill=\"white\" font-size=\"16\">menos desperdício</text>\n                  <g font-size=\"20\" font-weight=\"700\" text-anchor=\"middle\">\n                    <circle cx=\"160\" cy=\"100\" r=\"60\" fill=\"#91d5ff\"/><text x=\"160\" y=\"96\">💧 Água</text><text x=\"160\" y=\"122\" font-size=\"14\">usar somente o necessário</text>\n                    <circle cx=\"740\" cy=\"100\" r=\"60\" fill=\"#fff1b8\"/><text x=\"740\" y=\"96\">⚡ Energia</text><text x=\"740\" y=\"122\" font-size=\"14\">evitar consumo ocioso</text>\n                    <circle cx=\"160\" cy=\"245\" r=\"60\" fill=\"#d9f7be\"/><text x=\"160\" y=\"241\">🔩 Materiais</text><text x=\"160\" y=\"267\" font-size=\"14\">reduzir perdas</text>\n                    <circle cx=\"740\" cy=\"245\" r=\"60\" fill=\"#ffd8bf\"/><text x=\"740\" y=\"241\">⛽ Combustível</text><text x=\"740\" y=\"267\" font-size=\"14\">evitar desperdício</text>\n                  </g>\n                  <path d=\"M225 112 L365 145 M675 112 L535 145 M225 232 L365 185 M675 232 L535 185\" stroke=\"#5b708f\" stroke-width=\"5\" stroke-linecap=\"round\"/>\n                </svg>\n                "}, {"title": "Sustentabilidade: definição, políticas, programas e pilares", "objective": "Compreender o conceito de sustentabilidade e seus três pilares principais.", "content": "\n                <h3>Definição simples</h3>\n                <p><strong>Sustentabilidade</strong> é atender às necessidades atuais sem comprometer as condições de vida das futuras gerações.</p>\n                <h3>Os três pilares</h3>\n                <div class=\"three-cards\">\n                  <div class=\"mini green\"><strong>🌿 Ambiental</strong><br>Preservar recursos, reduzir poluição e dar destino correto aos resíduos.</div>\n                  <div class=\"mini blue\"><strong>👥 Social</strong><br>Promover segurança, saúde, respeito e qualidade de vida.</div>\n                  <div class=\"mini orange\"><strong>📈 Econômico</strong><br>Produzir com eficiência, reduzir perdas e manter a atividade viável.</div>\n                </div>\n                <h3>Políticas e programas</h3>\n                <p>São regras, metas e ações criadas pela empresa para orientar práticas sustentáveis. Exemplos: programa de redução do consumo de energia, coleta seletiva, controle de resíduos e treinamento ambiental.</p>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 360\" class=\"lesson-svg\" role=\"img\" aria-label=\"Pilares da sustentabilidade\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"344\" rx=\"24\" fill=\"#fbfdff\" stroke=\"#cad7e8\"/>\n                  <circle cx=\"450\" cy=\"175\" r=\"78\" fill=\"#177a4e\" opacity=\".95\"/>\n                  <circle cx=\"350\" cy=\"120\" r=\"105\" fill=\"#7cc5ff\" opacity=\".65\"/>\n                  <circle cx=\"550\" cy=\"120\" r=\"105\" fill=\"#ffe07a\" opacity=\".65\"/>\n                  <circle cx=\"450\" cy=\"245\" r=\"105\" fill=\"#9ee493\" opacity=\".65\"/>\n                  <text x=\"350\" y=\"88\" text-anchor=\"middle\" font-size=\"24\" font-weight=\"700\">SOCIAL</text>\n                  <text x=\"550\" y=\"88\" text-anchor=\"middle\" font-size=\"24\" font-weight=\"700\">ECONÔMICO</text>\n                  <text x=\"450\" y=\"302\" text-anchor=\"middle\" font-size=\"24\" font-weight=\"700\">AMBIENTAL</text>\n                  <text x=\"450\" y=\"165\" text-anchor=\"middle\" fill=\"white\" font-size=\"23\" font-weight=\"800\">DESENVOLVIMENTO</text>\n                  <text x=\"450\" y=\"194\" text-anchor=\"middle\" fill=\"white\" font-size=\"23\" font-weight=\"800\">SUSTENTÁVEL</text>\n                </svg>\n                "}, {"title": "Recursos naturais: renováveis e não renováveis", "objective": "Diferenciar recursos renováveis e não renováveis e reconhecer exemplos ligados à indústria.", "content": "\n                <h3>O que são recursos naturais?</h3>\n                <p>São elementos da natureza utilizados pelas pessoas e pelas indústrias para produzir bens, gerar energia e realizar atividades.</p>\n                <div class=\"two-col\">\n                  <div class=\"box renewable\"><h3>♻️ Renováveis</h3><p>Podem se recompor naturalmente em um período relativamente curto.</p><p><strong>Exemplos:</strong> sol, vento, biomassa e água, quando bem gerenciada.</p></div>\n                  <div class=\"box nonrenew\"><h3>🛢️ Não renováveis</h3><p>Possuem estoque limitado e levam muito tempo para se formar.</p><p><strong>Exemplos:</strong> petróleo, carvão mineral, gás natural e minérios.</p></div>\n                </div>\n                <div class=\"tip\"><strong>Ligação com motores de combustão:</strong> gasolina e diesel são derivados do petróleo, um recurso não renovável. Por isso, consumo eficiente e manutenção correta ajudam a reduzir desperdícios.</div>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 320\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"304\" rx=\"24\" fill=\"#f9fcff\" stroke=\"#cad7e8\"/>\n                  <rect x=\"45\" y=\"55\" width=\"370\" height=\"210\" rx=\"24\" fill=\"#e6f7e9\"/>\n                  <rect x=\"485\" y=\"55\" width=\"370\" height=\"210\" rx=\"24\" fill=\"#fff0e5\"/>\n                  <text x=\"230\" y=\"95\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\" fill=\"#177a4e\">RENOVÁVEIS</text>\n                  <text x=\"670\" y=\"95\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\" fill=\"#a14c15\">NÃO RENOVÁVEIS</text>\n                  <g font-size=\"50\" text-anchor=\"middle\"><text x=\"130\" y=\"165\">☀️</text><text x=\"230\" y=\"165\">💨</text><text x=\"330\" y=\"165\">💧</text><text x=\"565\" y=\"165\">🛢️</text><text x=\"670\" y=\"165\">⛏️</text><text x=\"775\" y=\"165\">🔥</text></g>\n                  <g font-size=\"16\" text-anchor=\"middle\" fill=\"#334155\"><text x=\"230\" y=\"220\">sol • vento • água • biomassa</text><text x=\"670\" y=\"220\">petróleo • minérios • gás natural</text></g>\n                </svg>\n                "}, {"title": "Meio ambiente e relação entre ser humano e ambiente", "objective": "Entender que o meio ambiente reúne elementos naturais, sociais e as relações entre eles.", "content": "\n                <p><strong>Meio ambiente</strong> é o conjunto de elementos naturais e sociais que nos cercam: ar, água, solo, plantas, animais, cidades, atividades humanas e relações entre todos esses elementos.</p>\n                <h3>Relação entre ser humano e meio ambiente</h3>\n                <p>As atividades humanas utilizam recursos e também podem gerar impactos. Uma oficina de manutenção, por exemplo, utiliza energia, água, peças, óleo e produtos químicos. Por isso, deve trabalhar de forma controlada e responsável.</p>\n                <div class=\"tip\"><strong>Regra simples:</strong> usar bem → evitar desperdício → evitar contaminação → separar resíduos → encaminhar corretamente.</div>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 320\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"304\" rx=\"24\" fill=\"#effaf4\" stroke=\"#c9dfd0\"/>\n                  <text x=\"450\" y=\"58\" text-anchor=\"middle\" font-size=\"28\" font-weight=\"800\" fill=\"#166534\">SER HUMANO ↔ MEIO AMBIENTE</text>\n                  <g font-size=\"54\" text-anchor=\"middle\"><text x=\"145\" y=\"145\">🌳</text><text x=\"285\" y=\"145\">💧</text><text x=\"425\" y=\"145\">🏭</text><text x=\"565\" y=\"145\">👨‍🔧</text><text x=\"705\" y=\"145\">🔧</text></g>\n                  <path d=\"M145 185 C250 260, 650 260, 705 185\" stroke=\"#16a34a\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"/>\n                  <path d=\"M705 205 C600 95, 250 95, 145 205\" stroke=\"#2563eb\" stroke-width=\"8\" fill=\"none\" stroke-linecap=\"round\"/>\n                  <text x=\"450\" y=\"275\" text-anchor=\"middle\" font-size=\"19\" fill=\"#334155\">Toda atividade usa recursos e pode gerar impactos: o objetivo é reduzir impactos e preservar os recursos.</text>\n                </svg>\n                "}], "quiz": [{"text": "Qual atitude representa melhor produção e consumo inteligente em uma oficina de motores?", "options": ["Manter equipamentos ligados mesmo quando não estão sendo usados.", "Usar água, energia, combustível e materiais de forma racional, evitando desperdícios.", "Trocar peças sempre, mesmo quando ainda podem ser utilizadas com segurança.", "Usar a maior quantidade possível de produtos de limpeza."], "answer": "B", "explanation": "Produção e consumo inteligente significam utilizar os recursos apenas na quantidade necessária, evitando perdas e desperdícios."}, {"text": "Quais são os três pilares da sustentabilidade apresentados no curso?", "options": ["Ambiental, social e econômico.", "Produção, estoque e vendas.", "Energia, água e combustível.", "Manutenção, transporte e qualidade."], "answer": "A", "explanation": "A sustentabilidade busca equilíbrio entre os aspectos ambiental, social e econômico."}, {"text": "Qual alternativa apresenta somente recursos não renováveis?", "options": ["Sol, vento e água.", "Biomassa, vento e petróleo.", "Petróleo, carvão mineral e gás natural.", "Água, sol e biomassa."], "answer": "C", "explanation": "Petróleo, carvão mineral e gás natural possuem estoque limitado e levam muito tempo para se formar."}, {"text": "Na manutenção de motores, qual ação ajuda a proteger o meio ambiente?", "options": ["Descartar óleo usado no ralo.", "Lavar peças usando água continuamente.", "Misturar todo tipo de resíduo em um único recipiente.", "Separar os resíduos e encaminhá-los para a destinação correta."], "answer": "D", "explanation": "Separar e destinar corretamente os resíduos reduz o risco de contaminação do solo, da água e do ambiente de trabalho."}]}, {"id": 2, "title": "Poluição Industrial", "hours": 2, "icon": "🏭", "lessons": [{"title": "O que é poluição industrial?", "objective": "Reconhecer poluição industrial e suas principais formas em atividades de manutenção.", "content": "\n                <p><strong>Poluição industrial</strong> ocorre quando uma atividade produtiva libera ou descarta substâncias, energia ou resíduos capazes de prejudicar o ar, a água, o solo ou a saúde das pessoas.</p>\n                <h3>Exemplos no contexto de motores</h3>\n                <ul>\n                  <li>Óleo ou combustível derramado no solo.</li>\n                  <li>Descarte incorreto de filtros contaminados.</li>\n                  <li>Fumaça e gases em ambientes sem ventilação adequada.</li>\n                  <li>Efluentes com graxa ou produtos químicos.</li>\n                  <li>Ruído excessivo sem controle.</li>\n                </ul>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#fff8f3\" stroke=\"#ead8c7\"/>\n                  <text x=\"450\" y=\"55\" text-anchor=\"middle\" font-size=\"28\" font-weight=\"800\" fill=\"#9a3412\">FONTES DE POLUIÇÃO INDUSTRIAL</text>\n                  <g font-size=\"56\" text-anchor=\"middle\"><text x=\"125\" y=\"145\">🛢️</text><text x=\"300\" y=\"145\">💨</text><text x=\"475\" y=\"145\">🧪</text><text x=\"650\" y=\"145\">🔊</text><text x=\"790\" y=\"145\">🗑️</text></g>\n                  <g font-size=\"17\" text-anchor=\"middle\" fill=\"#334155\"><text x=\"125\" y=\"188\">óleo</text><text x=\"300\" y=\"188\">gases</text><text x=\"475\" y=\"188\">químicos</text><text x=\"650\" y=\"188\">ruído</text><text x=\"790\" y=\"188\">resíduos</text></g>\n                  <path d=\"M110 235 H790\" stroke=\"#c2410c\" stroke-width=\"5\"/>\n                  <text x=\"450\" y=\"280\" text-anchor=\"middle\" font-size=\"20\" fill=\"#7c2d12\">Prevenir é melhor do que corrigir a contaminação depois.</text>\n                </svg>\n                "}, {"title": "Resíduos industriais: destinação, classificação e caracterização", "objective": "Aprender a separar resíduos e escolher uma destinação adequada.", "content": "\n                <h3>Resíduo industrial</h3>\n                <p>É todo material, substância ou objeto resultante de uma atividade industrial ou de manutenção que precisa ser descartado, reaproveitado ou tratado.</p>\n                <h3>Caracterizar e classificar</h3>\n                <p>Antes de destinar um resíduo, é preciso saber <strong>o que ele é</strong>, <strong>se está contaminado</strong> e <strong>quais riscos apresenta</strong>.</p>\n                <div class=\"three-cards\">\n                  <div class=\"mini\"><strong>Óleo usado</strong><br>Não deve ir para o solo, ralo ou lixo comum.</div>\n                  <div class=\"mini\"><strong>Metal limpo</strong><br>Pode seguir para reaproveitamento/reciclagem.</div>\n                  <div class=\"mini\"><strong>Pano contaminado</strong><br>Precisa de acondicionamento e destinação controlados.</div>\n                </div>\n                <p><strong>Destinação</strong> é o caminho que o resíduo seguirá: reutilização, reciclagem, tratamento ou disposição adequada.</p>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#f7fafc\" stroke=\"#cbd5e1\"/>\n                  <text x=\"450\" y=\"52\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">SEPARAR ANTES DE DESTINAR</text>\n                  <g text-anchor=\"middle\">\n                    <rect x=\"70\" y=\"95\" width=\"220\" height=\"165\" rx=\"18\" fill=\"#fee2e2\"/><text x=\"180\" y=\"140\" font-size=\"45\">🛢️</text><text x=\"180\" y=\"190\" font-size=\"21\" font-weight=\"800\">ÓLEO USADO</text><text x=\"180\" y=\"220\" font-size=\"15\">armazenar e encaminhar</text>\n                    <rect x=\"340\" y=\"95\" width=\"220\" height=\"165\" rx=\"18\" fill=\"#dcfce7\"/><text x=\"450\" y=\"140\" font-size=\"45\">🔩</text><text x=\"450\" y=\"190\" font-size=\"21\" font-weight=\"800\">METAL</text><text x=\"450\" y=\"220\" font-size=\"15\">reuso ou reciclagem</text>\n                    <rect x=\"610\" y=\"95\" width=\"220\" height=\"165\" rx=\"18\" fill=\"#fef3c7\"/><text x=\"720\" y=\"140\" font-size=\"45\">🧤</text><text x=\"720\" y=\"190\" font-size=\"21\" font-weight=\"800\">CONTAMINADO</text><text x=\"720\" y=\"220\" font-size=\"15\">destinação controlada</text>\n                  </g>\n                </svg>\n                "}, {"title": "Prevenção: redução, reuso, reciclagem, tratamento e disposição", "objective": "Entender a ordem de prioridade das ações de prevenção da poluição.", "content": "\n                <p>Uma boa gestão procura primeiro <strong>evitar gerar</strong> o resíduo. Quando isso não for possível, busca reduzir, reutilizar, reciclar, tratar e, por último, realizar a disposição final adequada.</p>\n                <ol class=\"priority\">\n                  <li><strong>Redução:</strong> gerar menos resíduo.</li>\n                  <li><strong>Reuso:</strong> usar novamente quando tecnicamente possível.</li>\n                  <li><strong>Reciclagem:</strong> transformar o material em matéria-prima.</li>\n                  <li><strong>Tratamento:</strong> diminuir perigos ou impactos.</li>\n                  <li><strong>Disposição:</strong> encaminhar corretamente o que não puder ser aproveitado.</li>\n                </ol>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 350\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"334\" rx=\"24\" fill=\"#fbfdff\" stroke=\"#cbd8e8\"/>\n                  <text x=\"450\" y=\"48\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">HIERARQUIA DE PREVENÇÃO</text>\n                  <polygon points=\"190,80 710,80 650,135 250,135\" fill=\"#86efac\"/>\n                  <polygon points=\"250,145 650,145 595,200 305,200\" fill=\"#bbf7d0\"/>\n                  <polygon points=\"305,210 595,210 550,260 350,260\" fill=\"#fde68a\"/>\n                  <polygon points=\"350,270 550,270 510,318 390,318\" fill=\"#fdba74\"/>\n                  <text x=\"450\" y=\"115\" text-anchor=\"middle\" font-size=\"21\" font-weight=\"800\">REDUZIR</text>\n                  <text x=\"450\" y=\"180\" text-anchor=\"middle\" font-size=\"20\" font-weight=\"800\">REUTILIZAR / RECICLAR</text>\n                  <text x=\"450\" y=\"243\" text-anchor=\"middle\" font-size=\"20\" font-weight=\"800\">TRATAR</text>\n                  <text x=\"450\" y=\"302\" text-anchor=\"middle\" font-size=\"18\" font-weight=\"800\">DISPOR</text>\n                </svg>\n                "}, {"title": "Ciclo de vida, economia circular, produção mais limpa e logística reversa", "objective": "Conhecer quatro abordagens importantes para prevenir impactos ambientais.", "content": "\n                <h3>Ciclo de vida</h3>\n                <p>Analisa um produto desde a obtenção da matéria-prima até o uso e a destinação final.</p>\n                <h3>Economia circular</h3>\n                <p>Busca manter materiais e produtos em uso pelo maior tempo possível, reduzindo descarte e retornando materiais ao ciclo produtivo.</p>\n                <h3>Produção mais limpa</h3>\n                <p>Procura prevenir desperdícios e poluição na origem, melhorando processos, uso de matérias-primas, água e energia.</p>\n                <h3>Logística reversa</h3>\n                <p>É o retorno de produtos ou resíduos após o uso para reaproveitamento, reciclagem, tratamento ou destinação adequada.</p>\n                <div class=\"tip\"><strong>Exemplo prático:</strong> óleo lubrificante usado deve ser coletado e encaminhado por fluxo adequado, e não descartado no solo ou na rede de esgoto.</div>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 350\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"334\" rx=\"24\" fill=\"#eefbf5\" stroke=\"#c6e3d2\"/>\n                  <circle cx=\"450\" cy=\"175\" r=\"90\" fill=\"#15803d\"/>\n                  <text x=\"450\" y=\"166\" text-anchor=\"middle\" fill=\"white\" font-size=\"24\" font-weight=\"800\">ECONOMIA</text>\n                  <text x=\"450\" y=\"197\" text-anchor=\"middle\" fill=\"white\" font-size=\"24\" font-weight=\"800\">CIRCULAR</text>\n                  <g font-size=\"48\" text-anchor=\"middle\"><text x=\"450\" y=\"65\">⛏️</text><text x=\"705\" y=\"180\">🏭</text><text x=\"450\" y=\"325\">🚗</text><text x=\"195\" y=\"180\">♻️</text></g>\n                  <path d=\"M510 88 C620 95 690 120 705 145 M690 210 C630 280 550 300 495 300 M405 300 C315 285 235 250 205 210 M200 145 C250 90 330 72 390 75\" fill=\"none\" stroke=\"#22c55e\" stroke-width=\"9\" stroke-linecap=\"round\"/>\n                  <text x=\"450\" y=\"245\" text-anchor=\"middle\" font-size=\"16\" fill=\"#14532d\">matéria-prima → produção → uso → retorno</text>\n                </svg>\n                "}], "quiz": [{"text": "Qual situação é um exemplo de poluição industrial em uma oficina?", "options": ["Ferramentas organizadas em painel.", "Óleo lubrificante derramado e deixado no solo.", "Corredores de circulação desobstruídos.", "Resíduos separados em recipientes adequados."], "answer": "B", "explanation": "Óleo no solo pode contaminar o ambiente e caracteriza uma situação de poluição."}, {"text": "Na prevenção da poluição, qual ação deve ser priorizada antes da disposição final?", "options": ["Aumentar a geração de resíduos.", "Misturar resíduos para ocupar menos espaço.", "Reduzir a geração, reutilizar e reciclar sempre que possível.", "Descartar tudo diretamente no lixo comum."], "answer": "C", "explanation": "A prioridade é evitar ou reduzir a geração e, depois, buscar reuso, reciclagem e tratamento antes da disposição final."}]}, {"id": 3, "title": "Organização de Ambientes de Trabalho", "hours": 2, "icon": "🧰", "lessons": [{"title": "Princípios de organização", "objective": "Entender por que organização melhora segurança, produtividade e qualidade.", "content": "\n                <p>Um ambiente organizado facilita o trabalho, reduz perda de tempo e diminui riscos.</p>\n                <h3>Princípios simples</h3>\n                <ul>\n                  <li>Cada item deve ter um local definido.</li>\n                  <li>Materiais devem estar identificados.</li>\n                  <li>Corredores, acessos e saídas devem permanecer livres.</li>\n                  <li>Limpeza deve fazer parte da rotina.</li>\n                  <li>Itens desnecessários devem ser retirados do posto de trabalho.</li>\n                </ul>\n                <div class=\"tip\"><strong>Na manutenção de motores:</strong> deixar ferramentas espalhadas pode causar perda de tempo, acidentes ou até esquecimento de objetos próximos ao motor.</div>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#f7fbff\" stroke=\"#c9d8ea\"/>\n                  <text x=\"450\" y=\"52\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">POSTO ORGANIZADO = TRABALHO MAIS SEGURO</text>\n                  <rect x=\"70\" y=\"95\" width=\"330\" height=\"175\" rx=\"18\" fill=\"#fee2e2\"/>\n                  <rect x=\"500\" y=\"95\" width=\"330\" height=\"175\" rx=\"18\" fill=\"#dcfce7\"/>\n                  <text x=\"235\" y=\"135\" text-anchor=\"middle\" font-size=\"23\" font-weight=\"800\">DESORGANIZADO</text>\n                  <text x=\"665\" y=\"135\" text-anchor=\"middle\" font-size=\"23\" font-weight=\"800\">ORGANIZADO</text>\n                  <text x=\"235\" y=\"195\" text-anchor=\"middle\" font-size=\"50\">🔧 🧤 🪛 🗑️</text>\n                  <text x=\"665\" y=\"195\" text-anchor=\"middle\" font-size=\"50\">🧰 ✅ 📍 🧹</text>\n                  <text x=\"235\" y=\"235\" text-anchor=\"middle\" font-size=\"16\">perda de tempo • risco</text>\n                  <text x=\"665\" y=\"235\" text-anchor=\"middle\" font-size=\"16\">agilidade • segurança</text>\n                </svg>\n                "}, {"title": "Organização de ferramentas e instrumentos", "objective": "Aprender formas simples de guardar e controlar ferramentas e instrumentos.", "content": "\n                <p>Ferramentas e instrumentos devem ficar em locais definidos, identificados e adequados ao uso.</p>\n                <h3>Formas de organizar</h3>\n                <ul>\n                  <li>Painéis com contorno das ferramentas.</li>\n                  <li>Gavetas identificadas por tipo.</li>\n                  <li>Armários para instrumentos sensíveis.</li>\n                  <li>Caixas ou carrinhos organizadores.</li>\n                  <li>Separação de ferramentas limpas e contaminadas quando necessário.</li>\n                </ul>\n                <h3>Por que é importante?</h3>\n                <p>Evita perdas, facilita inspeções, reduz tempo de procura e ajuda a perceber rapidamente quando uma ferramenta está faltando.</p>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#f8fafc\" stroke=\"#cbd5e1\"/>\n                  <rect x=\"105\" y=\"70\" width=\"690\" height=\"190\" rx=\"20\" fill=\"#dbeafe\" stroke=\"#93c5fd\"/>\n                  <text x=\"450\" y=\"48\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">PAINEL DE FERRAMENTAS</text>\n                  <g font-size=\"55\" text-anchor=\"middle\"><text x=\"205\" y=\"150\">🔧</text><text x=\"325\" y=\"150\">🪛</text><text x=\"450\" y=\"150\">🔨</text><text x=\"575\" y=\"150\">🔩</text><text x=\"695\" y=\"150\">📏</text></g>\n                  <g font-size=\"15\" text-anchor=\"middle\" fill=\"#1e3a8a\"><text x=\"205\" y=\"205\">Chaves</text><text x=\"325\" y=\"205\">Chaves de fenda</text><text x=\"450\" y=\"205\">Martelos</text><text x=\"575\" y=\"205\">Fixadores</text><text x=\"695\" y=\"205\">Medição</text></g>\n                  <text x=\"450\" y=\"292\" text-anchor=\"middle\" font-size=\"18\" fill=\"#334155\">Lugar definido → devolução mais rápida → menor chance de perda.</text>\n                </svg>\n                "}, {"title": "Organização do espaço de trabalho", "objective": "Organizar o posto para facilitar circulação, acesso, manutenção e limpeza.", "content": "\n                <p>O espaço deve permitir que o trabalhador execute as tarefas sem obstáculos desnecessários.</p>\n                <h3>Cuidados importantes</h3>\n                <ul>\n                  <li>Manter o piso limpo e livre de óleo.</li>\n                  <li>Não bloquear extintores, quadros elétricos e rotas de fuga.</li>\n                  <li>Separar áreas de armazenamento e áreas de trabalho.</li>\n                  <li>Guardar resíduos em recipientes adequados.</li>\n                  <li>Manter boa iluminação e ventilação.</li>\n                </ul>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#f9fbff\" stroke=\"#cbd8e8\"/>\n                  <text x=\"450\" y=\"50\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">ORGANIZAÇÃO DO ESPAÇO</text>\n                  <rect x=\"80\" y=\"90\" width=\"190\" height=\"150\" rx=\"16\" fill=\"#e0f2fe\"/><text x=\"175\" y=\"140\" text-anchor=\"middle\" font-size=\"43\">🚪</text><text x=\"175\" y=\"195\" text-anchor=\"middle\" font-size=\"18\">Acesso livre</text>\n                  <rect x=\"355\" y=\"90\" width=\"190\" height=\"150\" rx=\"16\" fill=\"#dcfce7\"/><text x=\"450\" y=\"140\" text-anchor=\"middle\" font-size=\"43\">🧹</text><text x=\"450\" y=\"195\" text-anchor=\"middle\" font-size=\"18\">Limpeza</text>\n                  <rect x=\"630\" y=\"90\" width=\"190\" height=\"150\" rx=\"16\" fill=\"#fef3c7\"/><text x=\"725\" y=\"140\" text-anchor=\"middle\" font-size=\"43\">📦</text><text x=\"725\" y=\"195\" text-anchor=\"middle\" font-size=\"18\">Armazenamento</text>\n                  <path d=\"M115 270 H785\" stroke=\"#2563eb\" stroke-width=\"6\" stroke-dasharray=\"15 12\"/>\n                  <text x=\"450\" y=\"306\" text-anchor=\"middle\" font-size=\"17\">Circulação segura e área de trabalho desobstruída.</text>\n                </svg>\n                "}, {"title": "Organização, disciplina, tempo e compromisso", "objective": "Relacionar disciplina e planejamento das atividades com produtividade e segurança.", "content": "\n                <p><strong>Disciplina no trabalho</strong> é cumprir procedimentos, horários, padrões de segurança e responsabilidades combinadas.</p>\n                <h3>Gestão do tempo</h3>\n                <p>Antes de iniciar uma atividade, é importante saber o que será feito, quais ferramentas serão necessárias e qual é a prioridade.</p>\n                <h3>Compromisso</h3>\n                <p>Compromisso significa executar a tarefa com responsabilidade, qualidade e respeito aos procedimentos definidos.</p>\n                <div class=\"tip\"><strong>Sequência simples:</strong> planejar → preparar materiais → executar com segurança → conferir → organizar o posto.</div>\n                ", "visual": "\n                <svg viewBox=\"0 0 900 330\" class=\"lesson-svg\">\n                  <rect x=\"8\" y=\"8\" width=\"884\" height=\"314\" rx=\"24\" fill=\"#f8fafc\" stroke=\"#cbd5e1\"/>\n                  <text x=\"450\" y=\"52\" text-anchor=\"middle\" font-size=\"27\" font-weight=\"800\">ROTINA DE TRABALHO ORGANIZADA</text>\n                  <g text-anchor=\"middle\">\n                    <circle cx=\"120\" cy=\"165\" r=\"65\" fill=\"#dbeafe\"/><text x=\"120\" y=\"155\" font-size=\"40\">📝</text><text x=\"120\" y=\"195\" font-size=\"16\" font-weight=\"800\">PLANEJAR</text>\n                    <circle cx=\"330\" cy=\"165\" r=\"65\" fill=\"#dcfce7\"/><text x=\"330\" y=\"155\" font-size=\"40\">🧰</text><text x=\"330\" y=\"195\" font-size=\"16\" font-weight=\"800\">PREPARAR</text>\n                    <circle cx=\"570\" cy=\"165\" r=\"65\" fill=\"#fef3c7\"/><text x=\"570\" y=\"155\" font-size=\"40\">🔧</text><text x=\"570\" y=\"195\" font-size=\"16\" font-weight=\"800\">EXECUTAR</text>\n                    <circle cx=\"780\" cy=\"165\" r=\"65\" fill=\"#ede9fe\"/><text x=\"780\" y=\"155\" font-size=\"40\">✅</text><text x=\"780\" y=\"195\" font-size=\"16\" font-weight=\"800\">CONFERIR</text>\n                  </g>\n                  <path d=\"M190 165 H260 M400 165 H500 M640 165 H710\" stroke=\"#64748b\" stroke-width=\"7\" stroke-linecap=\"round\"/>\n                </svg>\n                "}], "quiz": [{"text": "Qual prática melhora a organização de ferramentas e instrumentos?", "options": ["Guardar cada ferramenta em qualquer local disponível.", "Deixar ferramentas próximas ao motor após o serviço.", "Usar locais identificados, como painéis, gavetas ou carrinhos organizadores.", "Misturar ferramentas limpas com materiais contaminados."], "answer": "C", "explanation": "Locais definidos e identificados facilitam o controle, reduzem perdas e tornam o trabalho mais rápido."}, {"text": "Qual sequência representa uma rotina de trabalho organizada?", "options": ["Executar → procurar materiais → planejar → conferir.", "Planejar → preparar materiais → executar com segurança → conferir e organizar.", "Executar → interromper → planejar → guardar.", "Guardar → executar → descartar → planejar."], "answer": "B", "explanation": "Planejar e preparar antes da execução reduz improvisos; ao final, conferir e organizar encerra a tarefa de forma adequada."}]}];
+const QUESTIONS = [{"topic": "Desenvolvimento Sustentável", "text": "Produção e consumo inteligente significa:", "options": ["usar recursos sem controle, desde que a produção aumente.", "usar água, energia e materiais de forma racional, evitando desperdícios.", "substituir toda manutenção preventiva por manutenção corretiva.", "utilizar apenas recursos não renováveis."], "answer": "B"}, {"topic": "Desenvolvimento Sustentável", "text": "Qual alternativa apresenta os três pilares da sustentabilidade?", "options": ["ambiental, social e econômico.", "produção, vendas e estoque.", "água, energia e combustível.", "qualidade, manutenção e transporte."], "answer": "A"}, {"topic": "Recursos Naturais", "text": "Qual é um exemplo de recurso natural não renovável diretamente relacionado aos motores de combustão?", "options": ["vento.", "luz solar.", "petróleo.", "biomassa."], "answer": "C"}, {"topic": "Meio Ambiente", "text": "Em uma oficina, qual ação demonstra melhor uso racional dos recursos?", "options": ["deixar equipamentos ligados durante todo o turno.", "usar mais água para acelerar a lavagem de peças.", "descartar peças metálicas junto ao lixo comum.", "desligar equipamentos ociosos e evitar desperdícios de água e materiais."], "answer": "D"}, {"topic": "Sustentabilidade", "text": "Uma política ambiental da empresa pode ser entendida como:", "options": ["um conjunto de orientações e compromissos para reduzir impactos e melhorar o desempenho ambiental.", "uma lista de peças usadas no motor.", "um tipo de combustível alternativo.", "um formulário usado apenas pelo setor financeiro."], "answer": "A"}, {"topic": "Poluição Industrial", "text": "Qual situação caracteriza uma forma de poluição industrial?", "options": ["ferramentas identificadas no painel.", "óleo lubrificante descartado no solo.", "corredor de circulação livre.", "peças armazenadas em local definido."], "answer": "B"}, {"topic": "Resíduos Industriais", "text": "Antes de destinar um resíduo industrial, é importante:", "options": ["misturar todos os resíduos para ocupar menos espaço.", "conhecer sua origem, características e possíveis riscos.", "descartar imediatamente no lixo comum.", "lavar todo resíduo com água."], "answer": "B"}, {"topic": "Prevenção da Poluição", "text": "Na hierarquia de prevenção da poluição, qual atitude deve ser priorizada?", "options": ["gerar menos resíduos na origem.", "enviar todo material diretamente para disposição final.", "misturar resíduos para facilitar o transporte.", "aumentar o uso de matérias-primas."], "answer": "A"}, {"topic": "Economia Circular", "text": "A economia circular procura:", "options": ["descartar produtos rapidamente após o uso.", "manter materiais e produtos circulando pelo maior tempo possível.", "eliminar qualquer forma de manutenção.", "usar somente matérias-primas virgens."], "answer": "B"}, {"topic": "Logística Reversa", "text": "Qual exemplo representa logística reversa?", "options": ["comprar uma ferramenta nova.", "transportar um motor da fábrica para a loja.", "encaminhar óleo usado para um fluxo de retorno, tratamento ou reaproveitamento adequado.", "guardar peças sem identificação."], "answer": "C"}, {"topic": "Organização do Trabalho", "text": "Um princípio básico de organização é:", "options": ["cada ferramenta deve ter um local definido.", "deixar materiais no chão para facilitar o acesso.", "guardar ferramentas em qualquer gaveta disponível.", "misturar itens limpos e contaminados."], "answer": "A"}, {"topic": "Ferramentas e Instrumentos", "text": "Qual é uma vantagem de usar painéis ou gavetas identificadas para ferramentas?", "options": ["aumentar o tempo de procura.", "facilitar o controle, reduzir perdas e agilizar o trabalho.", "impedir a limpeza do local.", "eliminar a necessidade de inspeção."], "answer": "B"}, {"topic": "Espaço de Trabalho", "text": "Em uma oficina organizada, deve-se:", "options": ["bloquear corredores com peças grandes.", "manter extintores e rotas de fuga desobstruídos.", "armazenar óleo usado em qualquer recipiente aberto.", "deixar ferramentas no piso após o serviço."], "answer": "B"}, {"topic": "Disciplina e Tempo", "text": "Qual sequência representa uma rotina organizada de trabalho?", "options": ["executar → procurar ferramentas → planejar → conferir.", "planejar → preparar → executar → conferir e organizar.", "guardar materiais → executar → planejar → interromper.", "executar → descartar tudo → conferir → planejar."], "answer": "B"}, {"topic": "Compromisso", "text": "No ambiente de trabalho, compromisso significa:", "options": ["executar tarefas sem seguir procedimentos.", "cumprir responsabilidades, prazos e padrões de segurança e qualidade.", "trabalhar apenas quando houver supervisão direta.", "priorizar velocidade mesmo que a segurança seja reduzida."], "answer": "B"}];
+const LETTERS = ['A','B','C','D'];
+const KEY = 'curso_eletromecanico_meio_ambiente_v2';
+
+function initialState(){
+  return {
+    name:'',
+    screen:'home',
+    module:0,
+    lesson:0,
+    completed: MODULES.map(m => m.lessons.map(() => false)),
+    moduleQuizAnswers: MODULES.map(m => m.quiz.map(() => null)),
+    moduleQuizChecked: MODULES.map(m => m.quiz.map(() => false)),
+    moduleQuizCompleted: MODULES.map(() => false),
+    quizIndex:0,
+    answers:Array(QUESTIONS.length).fill(null),
+    finished:false
+  };
+}
+
+let state = initialState();
+const $ = id => document.getElementById(id);
+
+function normalizeState(){
+  if(!state.completed || state.completed.length !== MODULES.length)
+    state.completed = MODULES.map(m => m.lessons.map(() => false));
+  if(!state.moduleQuizAnswers || state.moduleQuizAnswers.length !== MODULES.length)
+    state.moduleQuizAnswers = MODULES.map(m => m.quiz.map(() => null));
+  if(!state.moduleQuizChecked || state.moduleQuizChecked.length !== MODULES.length)
+    state.moduleQuizChecked = MODULES.map(m => m.quiz.map(() => false));
+  if(!state.moduleQuizCompleted || state.moduleQuizCompleted.length !== MODULES.length)
+    state.moduleQuizCompleted = MODULES.map(() => false);
+  if(!state.answers || state.answers.length !== QUESTIONS.length)
+    state.answers = Array(QUESTIONS.length).fill(null);
+}
+
+function save(){ localStorage.setItem(KEY, JSON.stringify(state)); }
+function load(){
+  try {
+    const x = JSON.parse(localStorage.getItem(KEY));
+    if(x) state = x;
+  } catch(e){}
+  normalizeState();
+}
+
+function totalLessons(){ return MODULES.reduce((s,m)=>s+m.lessons.length,0); }
+function totalModuleQuestions(){ return MODULES.reduce((s,m)=>s+m.quiz.length,0); }
+function doneLessons(){ return state.completed.flat().filter(Boolean).length; }
+function answeredModuleQuestions(){ return state.moduleQuizAnswers.flat().filter(a=>a!==null).length; }
+
+function progress(){
+  const done = doneLessons() + answeredModuleQuestions() + (state.finished ? 1 : 0);
+  const total = totalLessons() + totalModuleQuestions() + 1;
+  return Math.round(done / total * 100);
+}
+
+function performance(p){
+  if(p<50)return'Abaixo do Básico';
+  if(p<=60)return'Básico';
+  if(p<=80)return'Adequado';
+  return'Avançado';
+}
+
+function buildNav(){
+  const host = $('navModules');
+  host.innerHTML='';
+  MODULES.forEach((m,mi)=>{
+    const title=document.createElement('div');
+    title.className='module-title';
+    title.textContent=`${m.icon} MÓDULO ${m.id} — ${m.title} (${m.hours}h)`;
+    host.appendChild(title);
+
+    m.lessons.forEach((l,li)=>{
+      const b=document.createElement('button');
+      b.className='navbtn'+(state.screen==='lesson'&&state.module===mi&&state.lesson===li?' active':'')+(state.completed[mi][li]?' done':'');
+      b.textContent=`${mi+1}.${li+1} ${l.title}`;
+      b.onclick=()=>{ state.screen='lesson';state.module=mi;state.lesson=li;save();render(); };
+      host.appendChild(b);
+    });
+
+    const qb=document.createElement('button');
+    qb.className='navbtn'+(state.screen==='moduleQuiz'&&state.module===mi?' active':'')+(state.moduleQuizCompleted[mi]?' done':'');
+    qb.textContent=`📝 Atividade do Módulo ${m.id} — ${m.quiz.length} questão${m.quiz.length>1?'ões':''}`;
+    qb.onclick=()=>{state.screen='moduleQuiz';state.module=mi;save();render();};
+    host.appendChild(qb);
+  });
+
+  document.querySelectorAll('[data-screen]').forEach(b=>{
+    const scr=b.dataset.screen;
+    b.classList.toggle('active',state.screen===scr);
+    b.onclick=()=>{
+      if(scr==='result'&&!state.finished) return alert('Conclua o simulado final para liberar o desempenho.');
+      state.screen=scr;save();render();
+    };
+  });
+
+  const p=progress();
+  $('progressText').textContent=`Progresso do curso: ${p}%`;
+  $('progressBar').style.width=p+'%';
+}
+
+function render(){
+  buildNav();
+  const c=$('content');
+  if(state.screen==='home') return renderHome(c);
+  if(state.screen==='lesson') return renderLesson(c);
+  if(state.screen==='moduleQuiz') return renderModuleQuiz(c);
+  if(state.screen==='quiz') return renderQuiz(c);
+  if(state.screen==='result') return renderResult(c);
+}
+
+function renderHome(c){
+  const totalFormative = totalModuleQuestions();
+  c.innerHTML=`<section class="home-card">
+    <span class="badge">Curso Interativo • 8 horas</span>
+    <h2>Bem-vindo ao curso</h2>
+    <p>Você vai aprender, com linguagem simples e exemplos ligados à manutenção de motores, três temas importantes para o trabalho: <strong>Desenvolvimento Sustentável, Poluição Industrial e Organização de Ambientes de Trabalho.</strong></p>
+    <div class="overview">
+      <div class="overview-card"><strong>4 questões</strong>🌱 Desenvolvimento Sustentável</div>
+      <div class="overview-card"><strong>2 questões</strong>🏭 Poluição Industrial</div>
+      <div class="overview-card"><strong>2 questões</strong>🧰 Organização do Trabalho</div>
+    </div>
+    <p>Agora cada bloco possui sua própria atividade de fixação. Ao todo são <strong>${totalFormative} questões durante os módulos</strong>, além do <strong>simulado final com ${QUESTIONS.length} questões</strong>.</p>
+    <label><strong>Nome completo do aluno</strong></label>
+    <input id="studentName" class="name-input" value="${state.name}" placeholder="Digite o nome completo">
+    <div class="actions"><span></span><button id="startCourse" class="btn primary">Iniciar curso →</button></div>
+  </section>`;
+  $('startCourse').onclick=()=>{
+    const n=$('studentName').value.trim();
+    if(n.length<3) return alert('Digite o nome completo do aluno.');
+    state.name=n;state.screen='lesson';state.module=0;state.lesson=0;save();render();
+  };
+}
+
+function renderLesson(c){
+  const m=MODULES[state.module], l=m.lessons[state.lesson];
+  const isLastLesson = state.lesson===m.lessons.length-1;
+
+  c.innerHTML=`<section class="panel">
+    <div class="lesson-head"><span class="badge">${m.icon} Módulo ${m.id} • ${m.hours}h</span><h2>${l.title}</h2></div>
+    <div class="objective"><strong>🎯 Objetivo desta aula:</strong> ${l.objective}</div>
+    ${l.visual}
+    <div class="content">${l.content}</div>
+    <div class="actions">
+      <button id="prevLesson" class="btn secondary">← Voltar</button>
+      <button id="nextLesson" class="btn primary">${isLastLesson?`Ir para atividade do módulo (${m.quiz.length} questões) →`:'Concluir e avançar →'}</button>
+    </div>
+  </section>`;
+
+  $('prevLesson').onclick=()=>{
+    if(state.lesson>0) state.lesson--;
+    else if(state.module>0){
+      state.module--;
+      state.screen='moduleQuiz';
+    } else state.screen='home';
+    save();render();
+  };
+
+  $('nextLesson').onclick=()=>{
+    state.completed[state.module][state.lesson]=true;
+    if(state.lesson < m.lessons.length-1){
+      state.lesson++;
+    } else {
+      state.screen='moduleQuiz';
+    }
+    save();render();
+  };
+}
+
+function renderModuleQuiz(c){
+  const m=MODULES[state.module];
+  const completed=state.moduleQuizCompleted[state.module];
+
+  let questionsHtml=m.quiz.map((q,qi)=>{
+    const selected=state.moduleQuizAnswers[state.module][qi];
+    const checked=state.moduleQuizChecked[state.module][qi];
+    const opts=q.options.map((o,i)=>`<label class="module-option ${selected===LETTERS[i]?'selected':''}">
+      <input type="radio" name="mq${qi}" value="${LETTERS[i]}" ${selected===LETTERS[i]?'checked':''} ${checked?'disabled':''}>
+      <span class="letter">${LETTERS[i]}</span><span>${o}</span>
+    </label>`).join('');
+
+    let feedback='';
+    if(checked){
+      const ok=selected===q.answer;
+      feedback=`<div class="module-feedback ${ok?'ok':'err'}"><strong>${ok?'Correto!':'Resposta incorreta.'}</strong><br>${q.explanation}</div>`;
+    }
+
+    return `<div class="module-q">
+      <h3>${qi+1}. ${q.text}</h3>
+      ${opts}
+      <button class="btn secondary check-module-q" data-q="${qi}" ${checked?'disabled':''}>${checked?'Resposta conferida':'Conferir resposta'}</button>
+      ${feedback}
+    </div>`;
+  }).join('');
+
+  let scoreBlock='';
+  if(completed){
+    const hits=m.quiz.reduce((s,q,qi)=>s+(state.moduleQuizAnswers[state.module][qi]===q.answer?1:0),0);
+    scoreBlock=`<div class="result-level"><strong>Resultado do bloco: ${hits} / ${m.quiz.length}</strong><br>Você pode revisar as explicações acima antes de avançar.</div>`;
+  }
+
+  c.innerHTML=`<section class="panel">
+    <span class="badge">${m.icon} Atividade do Módulo ${m.id}</span>
+    <h2 class="module-quiz-title">${m.title}</h2>
+    <p class="module-quiz-intro">Responda às <strong>${m.quiz.length} questões</strong> referentes ao conteúdo estudado neste bloco. Confira cada resposta para visualizar uma explicação simples.</p>
+    ${questionsHtml}
+    ${scoreBlock}
+    <div class="actions">
+      <button id="backModule" class="btn secondary">← Voltar ao conteúdo</button>
+      <button id="finishModule" class="btn primary">${completed?(state.module===MODULES.length-1?'Ir para o Simulado Final →':'Avançar para o próximo módulo →'):'Concluir atividade do bloco'}</button>
+    </div>
+  </section>`;
+
+  document.querySelectorAll('.module-option input').forEach(inp=>{
+    inp.onchange=e=>{
+      const qi=parseInt(e.target.name.replace('mq',''));
+      state.moduleQuizAnswers[state.module][qi]=e.target.value;
+      save();renderModuleQuiz(c);
+    };
+  });
+
+  document.querySelectorAll('.check-module-q').forEach(btn=>{
+    btn.onclick=()=>{
+      const qi=parseInt(btn.dataset.q);
+      if(!state.moduleQuizAnswers[state.module][qi]) return alert('Marque uma alternativa antes de conferir.');
+      state.moduleQuizChecked[state.module][qi]=true;
+      save();render();
+    };
+  });
+
+  $('backModule').onclick=()=>{
+    state.screen='lesson';
+    state.lesson=m.lessons.length-1;
+    save();render();
+  };
+
+  $('finishModule').onclick=()=>{
+    if(!state.moduleQuizCompleted[state.module]){
+      if(state.moduleQuizAnswers[state.module].some(a=>a===null))
+        return alert(`Responda às ${m.quiz.length} questões deste bloco.`);
+      if(state.moduleQuizChecked[state.module].some(x=>!x))
+        return alert('Confira todas as respostas antes de concluir o bloco.');
+      state.moduleQuizCompleted[state.module]=true;
+      save();render();
+      return;
+    }
+
+    if(state.module < MODULES.length-1){
+      state.module++;
+      state.lesson=0;
+      state.screen='lesson';
+    } else {
+      state.screen='quiz';
+      state.quizIndex=0;
+    }
+    save();render();
+  };
+}
+
+function renderQuiz(c){
+  if(!state.name){ state.screen='home';save();return render(); }
+  const q=QUESTIONS[state.quizIndex], selected=state.answers[state.quizIndex];
+
+  const opts=q.options.map((o,i)=>`<label class="option ${selected===LETTERS[i]?'selected':''}">
+    <input type="radio" name="ans" value="${LETTERS[i]}" ${selected===LETTERS[i]?'checked':''}>
+    <span class="letter">${LETTERS[i]}</span><span>${o}</span>
+  </label>`).join('');
+
+  c.innerHTML=`<section class="panel">
+    <div class="quiz-meta"><span class="badge">Simulado Final</span><span class="tag">Questão ${state.quizIndex+1} de ${QUESTIONS.length}</span><span class="tag">${q.topic}</span></div>
+    <h2 class="qtext">${q.text}</h2>
+    <div>${opts}</div>
+    <div class="actions">
+      <button id="qprev" class="btn secondary">← Anterior</button>
+      <button id="qnext" class="btn primary">${state.quizIndex===QUESTIONS.length-1?'Finalizar Simulado':'Próxima →'}</button>
+    </div>
+  </section>`;
+
+  document.querySelectorAll('input[name="ans"]').forEach(inp=>inp.onchange=e=>{
+    state.answers[state.quizIndex]=e.target.value;save();renderQuiz(c);
+  });
+
+  $('qprev').onclick=()=>{
+    if(state.quizIndex>0) state.quizIndex--;
+    else{state.screen='moduleQuiz';state.module=MODULES.length-1;}
+    save();render();
+  };
+
+  $('qnext').onclick=()=>{
+    if(!state.answers[state.quizIndex]) return alert('Marque uma alternativa antes de continuar.');
+    if(state.quizIndex<QUESTIONS.length-1){state.quizIndex++;save();render();}
+    else{state.finished=true;state.screen='result';save();render();}
+  };
+}
+
+function calculate(){
+  const correct=QUESTIONS.reduce((s,q,i)=>s+(state.answers[i]===q.answer?1:0),0);
+  const wrong=QUESTIONS.length-correct;
+  const pct=correct/QUESTIONS.length*100;
+  return{correct,wrong,pct,level:performance(pct)};
+}
+
+function moduleResults(){
+  return MODULES.map((m,mi)=>{
+    const hits=m.quiz.reduce((s,q,qi)=>s+(state.moduleQuizAnswers[mi][qi]===q.answer?1:0),0);
+    return{title:m.title,hits,total:m.quiz.length};
+  });
+}
+
+function renderResult(c){
+  const r=calculate();
+  const blocks=moduleResults().map(x=>`<div class="stat"><strong>${x.hits} / ${x.total}</strong>${x.title}</div>`).join('');
+
+  c.innerHTML=`<section class="panel">
+    <span class="badge">Curso concluído</span>
+    <h2>${state.name}</h2>
+    <div class="score">${r.correct} / ${QUESTIONS.length}</div>
+    <p>Aproveitamento no simulado final: <strong>${r.pct.toFixed(1).replace('.',',')}%</strong></p>
+    <div class="result-level">Indicador de desempenho<br><strong>${r.level}</strong></div>
+
+    <h3>Atividades dos blocos</h3>
+    <div class="block-summary">${blocks}</div>
+
+    <div class="stats">
+      <div class="stat"><strong>${r.correct}</strong>Acertos no simulado</div>
+      <div class="stat"><strong>${r.wrong}</strong>Erros no simulado</div>
+      <div class="stat"><strong>100%</strong>Curso concluído</div>
+    </div>
+
+    <p><strong>Escala:</strong> abaixo de 50% = Abaixo do Básico; 50% a 60% = Básico; acima de 60% até 80% = Adequado; acima de 80% = Avançado.</p>
+    <div class="actions">
+      <button id="restart" class="btn secondary">Reiniciar curso</button>
+      <button id="report" class="btn primary">Emitir relatório em PDF</button>
+    </div>
+  </section>`;
+
+  $('restart').onclick=()=>{
+    if(confirm('Deseja apagar o progresso e reiniciar o curso?')){
+      localStorage.removeItem(KEY);location.reload();
+    }
+  };
+  $('report').onclick=generateReport;
+}
+
+function esc(v){return String(v).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');}
+
+function generateReport(){
+  const r=calculate();
+  const mr=moduleResults();
+  const moduleRows=mr.map((x,i)=>`<tr><td>Módulo ${i+1}</td><td>${esc(x.title)}</td><td>${x.hits} / ${x.total}</td></tr>`).join('');
+
+  const rows=QUESTIONS.map((q,i)=>{
+    const a=state.answers[i], idx=a?LETTERS.indexOf(a):-1;
+    const marked=idx>=0?q.options[idx]:'Não respondida';
+    const result=a===q.answer?'Acertou':'Errou';
+    const cls=result==='Acertou'?'ok':'err';
+    return `<tr><td>${i+1}</td><td>${a||'—'}${idx>=0?') '+esc(marked):''}</td><td class="${cls}">${result}</td></tr>`;
+  }).join('');
+
+  const w=window.open('','_blank');
+  if(!w)return alert('Permita pop-ups para abrir o relatório.');
+
+  w.document.write(`<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Relatório do Curso</title>
+  <style>
+  body{font-family:Arial;margin:25px;color:#111} table{border-collapse:collapse;width:100%;margin-top:12px}
+  th,td{border:1px solid #bbb;padding:8px;text-align:left;vertical-align:top} th{background:#eee}
+  td:first-child,th:first-child{width:85px;text-align:center} td:last-child,th:last-child{width:120px;text-align:center;font-weight:bold}
+  .ok{color:#157347}.err{color:#b42318}.summary{border:1px solid #bbb;padding:12px;margin:15px 0}
+  @media print{button{display:none}}
+  </style></head><body>
+  <button onclick="print()">Imprimir / Salvar como PDF</button>
+  <h1>Curso — Meio Ambiente, Sustentabilidade e Organização do Trabalho</h1>
+  <h2>Eletromecânico de Motores de Combustão Interna</h2>
+  <p><strong>Aluno:</strong> ${esc(state.name)}</p>
+  <div class="summary"><strong>Simulado final:</strong> ${r.correct} de ${QUESTIONS.length} — ${r.pct.toFixed(1).replace('.',',')}%<br><strong>Indicador:</strong> ${r.level}</div>
+  <h3>Desempenho nas atividades por bloco</h3>
+  <table><thead><tr><th>Bloco</th><th>Tema</th><th>Resultado</th></tr></thead><tbody>${moduleRows}</tbody></table>
+  <h3>Simulado final</h3>
+  <table><thead><tr><th>Questão</th><th>Alternativa marcada</th><th>Resultado</th></tr></thead><tbody>${rows}</tbody></table>
+  <script>setTimeout(()=>print(),300);<\/script></body></html>`);
+
+  w.document.close();
+}
+
+load();render();
+</script>
+</body>
+</html>
